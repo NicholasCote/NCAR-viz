@@ -3,7 +3,7 @@ Place for NCAR related opensource work around visualization requirements
 
 ## **Changes required for web hosting**
 `
-# Imported the flask module as Flask
+Imported the flask module as Flask
 from flask import Flask 
 
 app = Flask(__name__)   # Create the actual Flask web application
