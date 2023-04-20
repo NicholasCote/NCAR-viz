@@ -10,7 +10,6 @@ dependencies:
     - dask          # Parallel processing library
     - geopandas
     - future        # Python 2/3 compatibility
-    - flask         # Web framework
     - h5py          # Wrapper for HDF5
     - hvplot
     - ipython       # IPython interpreter and tools
