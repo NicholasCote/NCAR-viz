@@ -23,4 +23,5 @@ def panel_app():
 pn.serve({'/flask': app, 'panel': panel_app}, allow_websocket_origin=["127.0.0.1:5001"], port=5001)
 ```
 ## **mybinder.org for web visualization does not work**
+## **Link remains for reference**
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/NicholasCote/NCAR-viz/HEAD)
