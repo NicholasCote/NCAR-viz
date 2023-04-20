@@ -1,4 +1,4 @@
-# NCAR-Vix
+# NCAR-Viz
 Place for NCAR related opensource work around visualization requirements
 
 ## **Changes required for web hosting**
