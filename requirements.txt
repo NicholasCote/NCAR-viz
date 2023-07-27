@@ -1,0 +1,6 @@
+h5py
+matplotlib
+netcdf4
+panel
+scipy
+xarray
