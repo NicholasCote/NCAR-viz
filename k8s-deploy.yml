@@ -28,10 +28,12 @@ kind: Service
 metadata:
   name: ncar-viz-svc
   namespace: ncote-test
+  labels:
+    app: ncar-viz-test
 spec:
   ports:
-  - port: 80
-    targetPort: 5001
+  - port: 5001
+    name: viz-test-port
   selector:
     app: ncar-viz-test
 ---
@@ -47,13 +49,14 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
-  ingressClassName: prod-nginx
+  ingressClassName: nginx
   tls:
     - hosts:
       - ncote-test.k8s.ucar.edu
       secretName: incommon-account-key
   rules:
-  - http:
+  - host: ncote-test.k8s.ucar.edu
+    http:
       paths:
       - path: /
         pathType: Prefix
@@ -61,4 +64,4 @@ spec:
           service:
             name: ncar-viz-svc
             port:
-              number: 80
+              number: 5001
