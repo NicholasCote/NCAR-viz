@@ -5,4 +5,8 @@ COPY test.py requirements.txt ppe_viz.nc /
 
 RUN pip install -r requirements.txt
 
+RUN mkdir -p ./thumbnails/
+
+COPY panel.png test.png ./thumbnails/
+
 CMD ["python3", "test.py"]

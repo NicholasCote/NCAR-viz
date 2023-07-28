@@ -78,4 +78,4 @@ APP_ROUTES = {
     'test': test_panel,
 }
 
-pn.serve(APP_ROUTES, port=5001, title={'panel': 'A test panel', 'test': 'A second test panel'})
+pn.serve(APP_ROUTES, port=5001, title={'panel': 'A test panel', 'test': 'A second test panel'}, static_dirs={'thumbnails': './thumbnails/'}, allow_websocket_origin=["ncote-test.k8s.ucar.edu"])
