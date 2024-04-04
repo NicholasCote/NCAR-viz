@@ -1,35 +1,104 @@
 # This workflow builds docker images and pushes them to a Docker Hub Repository
+
+# This workflow builds docker images and pushes them to a Docker Hub Repository
 # This workflow is specific to the base-notebook directory and image
+
+# This workflow is specific to the base-notebook directory and image
+# Set the workflow name
+
 # Set the workflow name
 name: Build & push container image
 
+name: Build & push container image
+
+
+
+# Define the trigger that starts the action
+
 # Define the trigger that starts the action
 # For this workflow the trigger is on a push that changes anything in the configs/jupyter/base-notebook/ path
+
+# For this workflow the trigger is on a push that changes anything in the configs/jupyter/base-notebook/ path
+on:
+
 on:
   push:
+
+  push:
+    branches:
+
     branches:
       - main
 
+      - main
+
+
+
+# Define the actions that are going to take place as part of this workflow    
+
 # Define the actions that are going to take place as part of this workflow    
 jobs:
+
+jobs:
+  # Name the job(s)
+
   # Name the job(s)
   podman-build-push-image:
+
+  podman-build-push-image:
+    # Define where the job should run in this case it will be run on the latest ubuntu image
+
     # Define where the job should run in this case it will be run on the latest ubuntu image
     runs-on: self-hosted
+
+    runs-on: self-hosted
+    # Set the steps to take in order
+
     # Set the steps to take in order
     steps:
+
+    steps:
+      # Step 1 is to checkout the github repo used to build the Dockerfile
+
       # Step 1 is to checkout the github repo used to build the Dockerfile
       - name: Check out the repo
+
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
         uses: actions/checkout@v4
       # Get the date to apply to image tag
+
+      # Get the date to apply to image tag
+      - name: Get current date
+
       - name: Get current date
         id: date
+
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d.%H')" >> $GITHUB_OUTPUT
+
         run: echo "date=$(date +'%Y-%m-%d.%H')" >> $GITHUB_OUTPUT
       - name: Build Podman image
+
+      - name: Build Podman image
         run: |
+
+        run: |
+          podman build -f <container_file_path> -t hub.k8s.ucar.edu/<harbor_project>/<container_image_name>:${{ steps.date.outputs.date }} <container_dir_path>. --no-cache --format=docker
+
           podman build -f / -t hub.k8s.ucar.edu/<harbor_project>/<container_image_name>:${{ steps.date.outputs.date }} <container_dir_path>. --no-cache --format=docker
       - name: Login to Harbor
+
+      - name: Login to Harbor
+        run: podman login hub.k8s.ucar.edu -u <harbor_robot_account> -p ${{ secrets.HARBOR_LOGIN  }}
+
         run: podman login hub.k8s.ucar.edu -u robot-ncote+ncote -p ${{ secrets.HARBOR_LOGIN  }}
       - name: Push Podman image to Docker hub
+
+      - name: Push Podman image to Docker hub
         run: |
+
+        run: |
+          podman push hub.k8s.ucar.edu/<harbor_project>/<container_image_name>:${{ steps.date.outputs.date }}
           podman push hub.k8s.ucar.edu/<harbor_project>/ncote-ncar-viz:${{ steps.date.outputs.date }}
