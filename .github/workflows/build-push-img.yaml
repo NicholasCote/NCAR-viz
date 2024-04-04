@@ -87,7 +87,7 @@ jobs:
         run: |
           podman build -f <container_file_path> -t hub.k8s.ucar.edu/<harbor_project>/<container_image_name>:${{ steps.date.outputs.date }} <container_dir_path>. --no-cache --format=docker
 
-          podman build -f / -t hub.k8s.ucar.edu/<harbor_project>/<container_image_name>:${{ steps.date.outputs.date }} <container_dir_path>. --no-cache --format=docker
+          podman build -f <container_file_path> -t hub.k8s.ucar.edu/<harbor_project>/<container_image_name>:${{ steps.date.outputs.date }} //Dockerfile. --no-cache --format=docker
       - name: Login to Harbor
 
       - name: Login to Harbor
