@@ -11,4 +11,4 @@ webapp:
     image: hub.k8s.ucar.edu/ncote/ncote-ncar-viz
     port: 5001
     memory: 4
-    cpu: 1
+    cpu: 1    image: hub.k8s.ucar.edu/ncote/ncote-ncar-viz:2024-05-07.19
